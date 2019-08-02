@@ -27,6 +27,7 @@ def run_tkinter():
     ui.root.bind("<KeyPress>", kc.key_pressed)
     ui.loop()
 
+
 setup_gpio()
 run_tkinter()
 gpio.cleanup()
