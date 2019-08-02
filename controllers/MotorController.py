@@ -1,80 +1,77 @@
 import RPi.GPIO as gpio
 import time
+import config.gpio as gpio_config
 
 
 class MotorController:
 
     def __init__(self):
         self.tf = 0.03
-        self.in1 = 7
-        self.in2 = 11
-        self.in3 = 13
-        self.in4 = 15
+        self.pin1 = gpio_config.motor_controller['pin1']
+        self.pin2 = gpio_config.motor_controller['pin2']
+        self.pin3 = gpio_config.motor_controller['pin3']
+        self.pin4 = gpio_config.motor_controller['pin4']
 
     def setup(self):
-        gpio.setmode(gpio.BOARD)
-        gpio.setup(self.in1, gpio.OUT)
-        gpio.setup(self.in2, gpio.OUT)
-        gpio.setup(self.in3, gpio.OUT)
-        gpio.setup(self.in4, gpio.OUT)
+        pass
 
     def cleanup(self):
         gpio.cleanup()
-        print('cleaned up');
+        print('cleaned up')
 
     def output(self, pin, status):
         gpio.output(pin, status)
 
     def forward(self):
         self.setup()
-        self.output(self.in1, False)
-        self.output(self.in2, True)
-        self.output(self.in3, True)
-        self.output(self.in4, False)
+        self.output(self.pin1, False)
+        self.output(self.pin2, True)
+        self.output(self.pin3, True)
+        self.output(self.pin4, False)
         time.sleep(self.tf)
-        self.cleanup()
+        # self.cleanup()
 
     def reverse(self):
         self.setup()
-        self.output(self.in1, True)
-        self.output(self.in2, False)
-        self.output(self.in3, False)
-        self.output(self.in4, True)
+        self.output(self.pin1, True)
+        self.output(self.pin2, False)
+        self.output(self.pin3, False)
+        self.output(self.pin4, True)
         time.sleep(self.tf)
-        self.cleanup()
+        # self.cleanup()
 
     def turn_left(self):
         self.setup()
-        self.output(self.in1, False)
-        self.output(self.in2, True)
-        self.output(self.in3, False)
-        self.output(self.in4, False)
+        self.output(self.pin1, False)
+        self.output(self.pin2, True)
+        self.output(self.pin3, False)
+        self.output(self.pin4, False)
         time.sleep(self.tf)
-        self.cleanup()
+        # self.cleanup()
 
     def turn_right(self):
         self.setup()
-        self.output(self.in1, True)
-        self.output(self.in2, True)
-        self.output(self.in3, True)
-        self.output(self.in4, False)
+        self.output(self.pin1, True)
+        self.output(self.pin2, True)
+        self.output(self.pin3, True)
+        self.output(self.pin4, False)
         time.sleep(self.tf)
-        self.cleanup()
+        # self.cleanup()
 
     def pivot_left(self):
         self.setup()
-        self.output(self.in1, False)
-        self.output(self.in2, True)
-        self.output(self.in3, False)
-        self.output(self.in4, True)
+        self.output(self.pin1, False)
+        self.output(self.pin2, True)
+        self.output(self.pin3, False)
+        self.output(self.pin4, True)
         time.sleep(self.tf)
-        self.cleanup()
+        # self.cleanup()
 
     def pivot_right(self):
         self.setup()
-        self.output(self.in1, True)
-        self.output(self.in2, False)
-        self.output(self.in3, True)
-        self.output(self.in4, False)
+        self.output(self.pin1, True)
+        self.output(self.pin2, False)
+        self.output(self.pin3, True)
+        self.output(self.pin4, False)
         time.sleep(self.tf)
-        self.cleanup()
+        # self.cleanup()

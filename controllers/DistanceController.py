@@ -1,15 +1,14 @@
 import RPi.GPIO as gpio
 import time
+import config.gpio as gpio_config
+
 
 class DistanceController:
     def __init__(self):
-        self.trig = 12
-        self.echo = 16
+        self.trig = gpio_config.distance_controller['trig']
+        self.echo = gpio_config.distance_controller['echo']
         
     def setup(self):
-        #gpio.setmode(gpio.BOARD)
-        gpio.setup(self.trig, gpio.OUT)
-        gpio.setup(self.echo, gpio.IN)
         gpio.output(self.trig, False)
         time.sleep(1)
 
@@ -36,5 +35,4 @@ class DistanceController:
         else:
             print('invalid measure, supported cm and inch')
         
-        gpio.cleanup()
         return distance
