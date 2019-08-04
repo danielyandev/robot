@@ -7,6 +7,7 @@ class TkinterUi:
 
     def __init__(self):
         self.root = Tk()
+        self.root.geometry("250x250")
         # Create a frame
         self.app = Frame(self.root, bg="white")
         self.app.grid()

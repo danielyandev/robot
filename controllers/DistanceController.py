@@ -13,7 +13,7 @@ class DistanceController:
         gpio.setup(self.trig, gpio.OUT)
         gpio.setup(self.echo, gpio.IN)
         gpio.output(self.trig, False)
-        time.sleep(1)
+        #time.sleep(1)
 
     def check(self, measure='cm'):
         self.setup()
@@ -38,4 +38,5 @@ class DistanceController:
         else:
             print('invalid measure, supported cm and inch')
         
+        print(distance)
         return distance

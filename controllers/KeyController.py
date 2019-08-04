@@ -30,3 +30,4 @@ class KeyController:
             self.camera_controller.move_right()
         else:
             pass
+
