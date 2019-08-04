@@ -1,7 +1,7 @@
 import RPi.GPIO as gpio
 import time
 import config.gpio as gpio_config
-
+from controllers.DistanceController import DistanceController
 
 class MotorController:
 
@@ -11,6 +11,7 @@ class MotorController:
         self.pin2 = gpio_config.motor_controller['pin2']
         self.pin3 = gpio_config.motor_controller['pin3']
         self.pin4 = gpio_config.motor_controller['pin4']
+        self.dc = DistanceController()
 
     def setup(self):
         gpio.setmode(gpio.BCM)
@@ -25,7 +26,12 @@ class MotorController:
     def output(self, pin, status):
         gpio.output(pin, status)
 
+    def distance(self):
+        return self.dc.check()
+
     def forward(self):
+        if self.distance() <= 15:
+            return False
         self.setup()
         self.output(self.pin1, False)
         self.output(self.pin2, True)
