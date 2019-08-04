@@ -9,6 +9,7 @@ class DistanceController:
         self.echo = gpio_config.distance_controller['echo']
         
     def setup(self):
+        gpio.setmode(gpio.BCM)
         gpio.setup(self.trig, gpio.OUT)
         gpio.setup(self.echo, gpio.IN)
         gpio.output(self.trig, False)
