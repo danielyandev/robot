@@ -13,11 +13,14 @@ class MotorController:
         self.pin4 = gpio_config.motor_controller['pin4']
 
     def setup(self):
-        pass
+        gpio.setmode(gpio.BCM)
+        gpio.setup(self.pin1, gpio.OUT)
+        gpio.setup(self.pin2, gpio.OUT)
+        gpio.setup(self.pin3, gpio.OUT)
+        gpio.setup(self.pin4, gpio.OUT)
 
     def cleanup(self):
         gpio.cleanup()
-        print('cleaned up')
 
     def output(self, pin, status):
         gpio.output(pin, status)
@@ -29,7 +32,7 @@ class MotorController:
         self.output(self.pin3, True)
         self.output(self.pin4, False)
         time.sleep(self.tf)
-        # self.cleanup()
+        self.cleanup()
 
     def reverse(self):
         self.setup()
@@ -38,7 +41,7 @@ class MotorController:
         self.output(self.pin3, False)
         self.output(self.pin4, True)
         time.sleep(self.tf)
-        # self.cleanup()
+        self.cleanup()
 
     def turn_left(self):
         self.setup()
@@ -47,7 +50,7 @@ class MotorController:
         self.output(self.pin3, False)
         self.output(self.pin4, False)
         time.sleep(self.tf)
-        # self.cleanup()
+        self.cleanup()
 
     def turn_right(self):
         self.setup()
@@ -56,7 +59,7 @@ class MotorController:
         self.output(self.pin3, True)
         self.output(self.pin4, False)
         time.sleep(self.tf)
-        # self.cleanup()
+        self.cleanup()
 
     def pivot_left(self):
         self.setup()
@@ -65,7 +68,7 @@ class MotorController:
         self.output(self.pin3, False)
         self.output(self.pin4, True)
         time.sleep(self.tf)
-        # self.cleanup()
+        self.cleanup()
 
     def pivot_right(self):
         self.setup()
@@ -74,4 +77,4 @@ class MotorController:
         self.output(self.pin3, True)
         self.output(self.pin4, False)
         time.sleep(self.tf)
-        # self.cleanup()
+        self.cleanup()

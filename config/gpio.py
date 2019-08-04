@@ -1,10 +1,12 @@
+# NOTE: pins are in BCM mode
+
 motor_controller = {
-    "pin1": 7,
-    "pin2": 11,
-    "pin3": 13,
-    "pin4": 15,
+    "pin1": 4,
+    "pin2": 17,
+    "pin3": 27,
+    "pin4": 22,
 }
 distance_controller = {
-    "trig": 12,
-    "echo": 16,
+    "trig": 18,
+    "echo": 23,
 }
