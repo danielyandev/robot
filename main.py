@@ -31,5 +31,6 @@ def run_tkinter():
     gpio.cleanup()
 
 
+setup_gpio()
 #run_tkinter()
 run_web()
