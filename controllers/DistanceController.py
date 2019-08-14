@@ -3,7 +3,6 @@ import time
 import config.gpio as gpio_config
 import threading
 
-
 class DistanceController:
     def __init__(self):
         self.trig = gpio_config.distance_controller['trig']
@@ -12,22 +11,23 @@ class DistanceController:
         self.set_interval(self.set_distance, 0.5)
         
     def setup(self):
-        # gpio.setmode(gpio.BCM)
-        # gpio.setup(self.trig, gpio.OUT)
-        # gpio.setup(self.echo, gpio.IN)
+        gpio.setmode(gpio.BCM)
+        gpio.setup(self.trig, gpio.OUT)
+        gpio.setup(self.echo, gpio.IN)
         gpio.output(self.trig, False)
         time.sleep(0.5)
 
 
     def check(self, measure='cm'):
         self.setup()
+        nosig = 0
+        sig = 0
         
         gpio.output(self.trig, True)
         # Wait 10us
         time.sleep(0.00001)
         gpio.output(self.trig, False)
         nosig = time.time()
-        sig = 0
             
         while gpio.input(self.echo) == 0:
             nosig = time.time()
