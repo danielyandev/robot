@@ -1,9 +1,6 @@
 import http.server as server
 import socketserver
-import os
-import json
 import re
-import tempfile
 from controllers.MotorController import MotorController
 from controllers.CameraController import CameraController
 

@@ -7,7 +7,6 @@ import config.gpio as gpio_config
 class MotorController:
 
     def __init__(self):
-        self.setup()
         self.tf = 0.03
         self.pin1 = gpio_config.motor_controller['pin1']
         self.pin2 = gpio_config.motor_controller['pin2']
