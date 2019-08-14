@@ -16,7 +16,6 @@ class MotorController:
         #self.distance_controller = DistanceController()
 
     def setup(self):
-        self.setup()
         gpio.setmode(gpio.BCM)
         gpio.setup(self.pin1, gpio.OUT)
         gpio.setup(self.pin2, gpio.OUT)
