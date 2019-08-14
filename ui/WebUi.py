@@ -7,6 +7,10 @@ import tempfile
 from controllers.MotorController import MotorController
 from controllers.CameraController import CameraController
 
+motor_controller = MotorController()
+camera_controller = CameraController()
+
+
 
 class WebUi:
     def __init__(self):
@@ -47,8 +51,8 @@ class RequestHandler(server.SimpleHTTPRequestHandler):
             self.simple_handler.handle_go(self.path)
         elif camera:
             self.simple_handler.handle_camera(self.path)
-        return server.SimpleHTTPRequestHandler.do_GET(self)
-
+#        return server.SimpleHTTPRequestHandler.do_GET(self)
+        return self.send_head()
     def do_POST(self):
         return server.SimpleHTTPRequestHandler.do_POST(self)
 
@@ -62,35 +66,36 @@ class RequestHandler(server.SimpleHTTPRequestHandler):
         """
         path = self.path
         ctype = self.guess_type(path)
-        try:
+#        try:
             # Always read in binary mode. Opening files in text mode may cause
             # newline translations, making the actual size of the content
             # transmitted *less* than the content-length!
-            payload = open(path, 'rb')
-        except IOError:
-            self.send_error(404, "File not found ({0})".format(path))
-            return None
+ #           payload = open(path, 'rb')
+  #      except IOError:
+   #         self.send_error(404, "File not found ({0})".format(path))
+    #        return None
 
         if self.command == 'POST':
             self.send_response(202)
         else:
             self.send_response(200)
 
-        stat = os.fstat(payload.fileno())
+ #       stat = os.fstat(payload.fileno())
 
         self.send_header('Access-Control-Allow-Origin', '*')
-        self.send_header("Content-type", ctype)
-        self.send_header("Content-Length", str(stat.st_size))
-        self.send_header("Last-Modified", self.date_time_string(stat.st_mtime))
+   #     self.send_header("Content-type", ctype)
+#        self.send_header("Content-Length", str(stat.st_size))
+  #      self.send_header("Last-Modified", self.date_time_string(stat.st_mtime))
         self.end_headers()
+        return 'ok'
 
-        return payload
+#        return payload
+
         
 
 class SimpleHandler:
     def __init__(self):
-        self.motor_controller = MotorController()
-        self.camera_controller = CameraController()
+        pass
         
     def get_params(self, path):
         # split by ? and get all parameters string
@@ -110,17 +115,17 @@ class SimpleHandler:
         if 'direction' in params:
             direction = params['direction']
             if direction == 'forward':
-                self.motor_controller.forward()
+                motor_controller.forward()
             elif direction == 'reverse':
-                self.motor_controller.reverse()
+                motor_controller.reverse()
             elif direction == 'right':
-                self.motor_controller.turn_right()
+                motor_controller.turn_right()
             elif direction == 'left':
-                self.motor_controller.turn_left()
+                motor_controller.turn_left()
             elif direction == 'pivot_right':
-                self.motor_controller.pivot_right()
+                motor_controller.pivot_right()
             elif direction == 'pivot_left':
-                self.motor_controller.pivot_left()
+                motor_controller.pivot_left()
             else:
                 pass
                 
@@ -129,11 +134,11 @@ class SimpleHandler:
         if 'direction' in params:
             direction = params['direction']
             if direction == 'left':
-                self.camera_controller.move_left()
+                camera_controller.move_left()
             elif direction == 'right':
-                self.camera_controller.move_right()
+                camera_controller.move_right()
             elif direction == 'center':
-                self.camera_controller.move_center()
+                camera_controller.move_center()
             else:
                 pass
         

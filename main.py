@@ -2,7 +2,6 @@ from controllers.KeyController import KeyController
 from ui.TkinterUi import TkinterUi
 from ui.WebUi import WebUi
 import RPi.GPIO as gpio
-#import config.gpio as gpio_config
 
 
 def run_web():
@@ -17,4 +16,5 @@ def run_tkinter():
     ui.loop()
 
 
-run_tkinter()
+#run_tkinter()
+run_web()

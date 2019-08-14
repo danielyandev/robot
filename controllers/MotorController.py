@@ -29,57 +29,58 @@ class MotorController:
 
 
     def forward(self):
-        if self.distance_controller.check() < 20:
+        if self.distance_controller.distance < 20:
+            self.stop()
             return False
-        self.setup()
         self.output(self.pin1, False)
         self.output(self.pin2, True)
         self.output(self.pin3, True)
         self.output(self.pin4, False)
         time.sleep(self.tf)
-        self.cleanup()
+        self.stop()
 
     def reverse(self):
-        self.setup()
         self.output(self.pin1, True)
         self.output(self.pin2, False)
         self.output(self.pin3, False)
         self.output(self.pin4, True)
         time.sleep(self.tf)
-        self.cleanup()
+        self.stop()
 
     def turn_left(self):
-        self.setup()
         self.output(self.pin1, False)
         self.output(self.pin2, True)
         self.output(self.pin3, False)
         self.output(self.pin4, False)
         time.sleep(self.tf)
-        self.cleanup()
+        self.stop()
 
     def turn_right(self):
-        self.setup()
         self.output(self.pin1, True)
         self.output(self.pin2, True)
         self.output(self.pin3, True)
         self.output(self.pin4, False)
         time.sleep(self.tf)
-        self.cleanup()
+        self.stop()
 
     def pivot_left(self):
-        self.setup()
         self.output(self.pin1, False)
         self.output(self.pin2, True)
         self.output(self.pin3, False)
         self.output(self.pin4, True)
         time.sleep(self.tf)
-        self.cleanup()
+        self.stop()
 
     def pivot_right(self):
-        self.setup()
         self.output(self.pin1, True)
         self.output(self.pin2, False)
         self.output(self.pin3, True)
         self.output(self.pin4, False)
         time.sleep(self.tf)
-        self.cleanup()
+        self.stop()
+        
+    def stop(self):
+        gpio.output(self.pin1,  False)
+        gpio.output(self.pin2, False)
+        gpio.output(self.pin3, False)
+        gpio.output(self.pin4, False)

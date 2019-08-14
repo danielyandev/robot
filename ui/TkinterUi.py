@@ -28,5 +28,5 @@ class TkinterUi:
         self.lmain.after(1, self.video_stream)
 
     def loop(self):
-        #self.video_stream()
+        self.video_stream()
         self.root.mainloop()
